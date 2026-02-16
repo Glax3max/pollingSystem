@@ -30,10 +30,9 @@ export async function GET(request: NextRequest) {
     }
 
     // Convert votes map to object
-    const votesObject: Record<string, number> = {};
-    poll.votes.forEach((value, key) => {
-      votesObject[key] = value;
-    });
+    const votesObject: Record<string, number> = Object.fromEntries(
+      Array.from(poll.votes.entries())
+    ) as Record<string, number>;
 
     return NextResponse.json({
       success: true,

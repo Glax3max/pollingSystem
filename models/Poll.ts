@@ -1,7 +1,6 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
 
 export interface IPoll extends Document {
-  _id: string;
   question: string;
   options: string[];
   votes: Map<string, number>;

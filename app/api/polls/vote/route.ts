@@ -121,10 +121,9 @@ export async function POST(request: NextRequest) {
     await poll.save();
 
     // Convert votes map to object for response
-    const votesObject: Record<string, number> = {};
-    poll.votes.forEach((value, key) => {
-      votesObject[key] = value;
-    });
+    const votesObject: Record<string, number> = Object.fromEntries(
+      Array.from(poll.votes.entries())
+    ) as Record<string, number>;
 
     return NextResponse.json({
       success: true,

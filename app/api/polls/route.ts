@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
       {
         success: true,
         poll: {
-          id: poll._id,
+          id: poll._id.toString(),
           question: poll.question,
           options: poll.options,
           shareableId: poll.shareableId,
@@ -102,10 +102,9 @@ export async function GET(request: NextRequest) {
       }
 
       // Convert votes map to object
-      const votesObject: Record<string, number> = {};
-      poll.votes.forEach((value, key) => {
-        votesObject[key] = value;
-      });
+      const votesObject: Record<string, number> = Object.fromEntries(
+        Array.from(poll.votes.entries())
+      ) as Record<string, number>;
 
       return NextResponse.json({
         success: true,
