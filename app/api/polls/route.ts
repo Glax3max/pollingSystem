@@ -4,6 +4,10 @@ import Poll from '@/models/Poll';
 import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
 
+// Configure runtime for Vercel
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 const createPollSchema = z.object({
   question: z.string().min(1).max(500),
   options: z.array(z.string().min(1).max(200)).min(2).max(10),

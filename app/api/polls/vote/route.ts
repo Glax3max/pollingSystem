@@ -4,6 +4,10 @@ import Poll from '@/models/Poll';
 import Vote from '@/models/Vote';
 import { z } from 'zod';
 
+// Configure runtime for Vercel
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 const voteSchema = z.object({
   shareableId: z.string(),
   option: z.string(),
@@ -11,17 +15,25 @@ const voteSchema = z.object({
 });
 
 function getClientIp(request: NextRequest): string {
+  // Vercel uses x-forwarded-for header
   const forwarded = request.headers.get('x-forwarded-for');
   const realIp = request.headers.get('x-real-ip');
+  const cfConnectingIp = request.headers.get('cf-connecting-ip'); // Cloudflare
   
   if (forwarded) {
+    // x-forwarded-for can contain multiple IPs, take the first one
     return forwarded.split(',')[0].trim();
+  }
+  
+  if (cfConnectingIp) {
+    return cfConnectingIp;
   }
   
   if (realIp) {
     return realIp;
   }
   
+  // Fallback for local development
   return request.ip || 'unknown';
 }
 

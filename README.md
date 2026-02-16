@@ -19,6 +19,7 @@ A modern polling system built with Next.js, TypeScript, Tailwind CSS, and MongoD
 
 - Node.js 18+ installed
 - MongoDB instance running (local or cloud)
+- Vercel account (for deployment) - [Sign up here](https://vercel.com)
 
 ## Setup Instructions
 
@@ -153,6 +154,19 @@ Get poll results.
 - **Tailwind CSS**: Utility-first CSS framework
 - **MongoDB**: NoSQL database with Mongoose ODM
 - **Zod**: Schema validation
+
+## Deployment to Vercel
+
+This app is optimized for Vercel deployment. See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+
+**Quick Deploy:**
+
+1. Push your code to GitHub/GitLab/Bitbucket
+2. Import your repository in Vercel
+3. Add environment variable: `MONGODB_URI`
+4. Deploy!
+
+The app will automatically work with Vercel's serverless functions and edge network.
 
 ## License
 
